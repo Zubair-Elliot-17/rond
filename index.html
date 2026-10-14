@@ -695,7 +695,9 @@ footer { padding-block: 60px 24px; }
       R = Math.min(mobile ? W * 0.13 : Math.min(W, H) * 0.12, firstH * 0.36);
       roadBase = cardTop + R * 2.4;
       scrollable = Math.max(0, outer.offsetHeight - window.innerHeight);
-      xLeft = mobile ? R : -R; xRight = W - R;
+      // The wheel is porcelain on porcelain outside the cards, so on mobile keep it inside them.
+      const sl = sticky.getBoundingClientRect().left, c0 = cards[0].getBoundingClientRect(), c1 = cards[1].getBoundingClientRect();
+      xLeft = mobile ? c0.left - sl + R : -R; xRight = mobile ? c1.right - sl - R : W - R;
       tEntry = mobile ? 0.05 : (2 * R) / (xRight - xLeft);
       update(); render(progress);
     }
