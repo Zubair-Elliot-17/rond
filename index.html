@@ -566,12 +566,14 @@ footer { padding-block: 60px 24px; }
     gsap.ticker.add(t => lenis.raf(t * 1000));
     gsap.ticker.lagSmoothing(0);
   }
+  // Pinned sections start on an empty frame, so they register a scroll position to land on instead.
+  const landing = {};
   $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
     const target = document.getElementById(a.getAttribute('href').slice(1));
     if (!target || !lenis) return;
     e.preventDefault();
     // Jump behind a crossfade so sections in between don't play their animations on the way past.
-    const jump = () => lenis.scrollTo(target, { immediate: true, force: true });
+    const land = landing[target.id], jump = () => lenis.scrollTo(land ? land() : target, { immediate: true, force: true });
     document.startViewTransition ? document.startViewTransition(jump) : jump();
     target.tabIndex = -1; target.focus({ preventScroll: true });
   }));
@@ -814,6 +816,7 @@ footer { padding-block: 60px 24px; }
       snap: lenis ? false : { snapTo: (v, self) => pick(v, self.direction), duration: { min: .45, max: .65 }, delay: SNAP_DELAY / 1000, ease: 'power1.inOut', inertia: false }
     });
     if (!lenis) return;
+    landing.work = () => st.labelToScroll('s0');
     let dir = 0, lastY = st.scroll(), touching = false, wheelT, idleT;
     const heading = () => lenis.isScrolling === 'smooth' && typeof lenis.targetScroll === 'number' ? lenis.targetScroll : st.scroll();
     function trySnap() {
@@ -831,7 +834,7 @@ footer { padding-block: 60px 24px; }
     addEventListener('wheel', onWheel, { passive: true });
     addEventListener('touchstart', onTouchStart, { passive: true });
     addEventListener('touchend', onTouchEnd, { passive: true });
-    return () => { clearTimeout(idleT); clearTimeout(wheelT); off && off(); removeEventListener('wheel', onWheel); removeEventListener('touchstart', onTouchStart); removeEventListener('touchend', onTouchEnd); };
+    return () => { delete landing.work; clearTimeout(idleT); clearTimeout(wheelT); off && off(); removeEventListener('wheel', onWheel); removeEventListener('touchstart', onTouchStart); removeEventListener('touchend', onTouchEnd); };
   });
 
   /* ---------- Rough to round: shape follows the pointer, morphs at checkpoints, leaves fading trails ---------- */
@@ -900,11 +903,12 @@ footer { padding-block: 60px 24px; }
     if (reduce) return;
     const split = SplitText.create('#focus-h', { type: 'lines', linesClass: 'line' });
     const tl = gsap.timeline({ scrollTrigger: { trigger: '#focus', start: 'top top', end: '+=180%', pin: true, scrub: true } });
-    tl.from(split.lines, { opacity: 0, filter: 'blur(18px)', y: 30, stagger: .15, duration: .5 })
+    tl.from(split.lines, { opacity: 0, filter: 'blur(18px)', y: 30, stagger: .15, duration: .5 }).addLabel('in')
       .to('#focus-h', { filter: 'blur(14px)', opacity: .55, duration: .4 }, '+=.25')
       .from('.ticket', { yPercent: 130, rotation: i => [-6, 3, 8][i], stagger: .12, duration: .6, ease: 'power2.out' }, '<')
       .to('.ticket', { rotation: 0, y: 0, duration: .3 });
-    return () => split.revert();
+    landing.classes = () => tl.scrollTrigger.labelToScroll('in');
+    return () => { delete landing.classes; split.revert(); };
   });
 
   /* ---------- Studio desk: windows open from their icons and drag around ---------- */
