@@ -903,7 +903,7 @@ footer { padding-block: 60px 24px; }
     tl.from(split.lines, { opacity: 0, filter: 'blur(18px)', y: 30, stagger: .15, duration: .5 })
       .to('#focus-h', { filter: 'blur(14px)', opacity: .55, duration: .4 }, '+=.25')
       .from('.ticket', { yPercent: 130, rotation: i => [-6, 3, 8][i], stagger: .12, duration: .6, ease: 'power2.out' }, '<')
-      .to('.ticket', { rotation: i => [0, 0, 3][i], y: i => [0, 0, 18][i], duration: .3 });
+      .to('.ticket', { rotation: 0, y: 0, duration: .3 });
     return () => split.revert();
   });
 
