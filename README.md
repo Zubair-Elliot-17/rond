@@ -42,6 +42,7 @@ python3 -m http.server 8765
 
 - Clock in Cape Town time (SAST).
 - `prefers-reduced-motion` skips the intro, the logo loop, the blur reveals and smooth scrolling. Scroll-linked pieces still follow the scrollbar directly.
-- The rough-to-round track is a keyboard slider.
+- The rough-to-round track is a keyboard slider; on phones you drag it anywhere along the line.
+- Phones get their own layout: collections become a swipe row (tap a name to jump), process cards keep their copy, the gradient blur is lighter and the canvas caps at 2× pixel density.
 
 ROND, its address and its people are made up. Animation credit goes to Neutomni.
