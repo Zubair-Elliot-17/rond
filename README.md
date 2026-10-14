@@ -4,9 +4,9 @@ A landing page for **ROND**, a fictional ceramics studio and kiln in Woodstock, 
 
 [**Live site**](https://rond-taupe.vercel.app) · [**Walkthrough video**](https://rond-taupe.vercel.app/docs/walkthrough.mp4) · [**Animation map**](#animation-map)
 
-<a href="https://rond-taupe.vercel.app/docs/walkthrough.mp4"><img src="docs/walkthrough-poster.jpg" alt="Play the 80-second narrated walkthrough of the ROND site" width="820"></a>
+<a href="https://rond-taupe.vercel.app/docs/walkthrough.mp4"><img src="docs/walkthrough-poster.jpg" alt="Play the 85-second narrated walkthrough of the ROND site" width="820"></a>
 
-<sub>An 80-second narrated tour of the site and the code behind it. Also in the repo as <a href="docs/walkthrough.mp4">docs/walkthrough.mp4</a>.</sub>
+<sub>An 85-second narrated tour of the site and the code behind it. Also in the repo as <a href="docs/walkthrough.mp4">docs/walkthrough.mp4</a>.</sub>
 
 The idea I borrowed is Neutomni's "the road can get bumpy, we keep you rolling": a polygon rolls along a bumpy road and turns into a circle as you scroll. For a pottery studio that is the whole job. Clay starts as a lump, and the wheel keeps turning until it comes out round.
 
