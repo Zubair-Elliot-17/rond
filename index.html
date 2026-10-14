@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="en" class="intro">
+<head>
+<title>ROND Ceramics</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="ROND is a fictional ceramics studio and kiln in Woodstock, Cape Town. A motion study inspired by neutomni.com.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@1,9..144,300..500,100,1&family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600&display=swap">
+<script>
+  // Hide intro elements until the script plays them; fall back to visible if scripts never load.
+  setTimeout(function () { document.documentElement.classList.remove('intro'); }, 5000);
+</script>
+<style>
+/* Layout: a porcelain page ruled by one cobalt glaze; giant wordmark, editorial columns, scroll-driven set pieces. */
+:root {
+  --porcelain: #F1F3EF;
+  --paper: #FAFBF8;
+  --cobalt: #2340B8;
+  --cobalt-deep: #172C8A;
+  --ink: #141833;
+  --celadon: #B8D2C2;
+  --ember: #E8763A;
+  --muted: #5A6080;
+  --display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --italic: "Fraunces", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --gutter: 20px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+body {
+  margin: 0;
+  background: var(--porcelain);
+  color: var(--cobalt);
+  font: 400 16px/1.4 var(--display);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+em, .it { font-family: var(--italic); font-style: italic; font-weight: 400; font-variation-settings: "SOFT" 100, "WONK" 1; letter-spacing: -0.01em; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+.wrap { padding-left: max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right: max(var(--gutter), env(safe-area-inset-right, 0px)); }
+.mono { font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+h1, h2, h3, p { margin: 0; text-wrap: balance; }
+p { text-wrap: pretty; }
+.line { will-change: transform, filter, opacity; }
+
+/* ---------- Hero ---------- */
+.hero { padding-block: 20px 28px; position: relative; }
+.logo { display: block; width: 100%; height: auto; overflow: visible; fill: var(--cobalt); }
+.hero_bar { display: grid; grid-template-columns: 1fr 1fr auto; gap: 16px; align-items: baseline; margin-top: 18px; font-size: 16px; }
+.hero_bar nav { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero_bar nav a, .hero_mail { position: relative; }
+.hero_bar nav a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -2px; height: 1px; background: currentColor; transition: right .35s cubic-bezier(.25,.46,.45,.94); }
+.hero_bar nav a:hover::after { right: 0; }
+.hero_mail { font-family: var(--italic); font-style: italic; font-size: 17px; }
+.hero_main { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: clamp(80px, 13vw, 170px); }
+.hero_h1 { grid-column: 2; font-size: clamp(34px, 3.6vw, 54px); line-height: 1.04; font-weight: 400; letter-spacing: -0.025em; }
+.hero_h1 em { display: inline-block; font-size: 1.06em; }
+.strip { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin-top: 56px; transform-origin: 50% 0; }
+.strip > div { aspect-ratio: 4 / 5; overflow: hidden; }
+.strip svg { width: 100%; height: 100%; display: block; }
+.hero_foot { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; gap: 16px; }
+.firing { display: inline-flex; align-items: center; gap: 10px; }
+.firing i { width: 9px; height: 9px; border-radius: 50%; background: var(--ember); box-shadow: 0 0 0 0 rgba(232,118,58,.6); animation: pulse 1.8s infinite; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(232,118,58,0); } 100% { box-shadow: 0 0 0 0 rgba(232,118,58,0); } }
+html.intro .hero_h1, html.intro .strip, html.intro .hero_bar nav, html.intro .hero_foot { visibility: hidden; }
+
+/* Odometer loader */
+.loader { position: fixed; right: max(var(--gutter), env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 50; display: flex; align-items: flex-end; gap: 6px; pointer-events: none; }
+.odo { display: flex; height: 20px; overflow: hidden; font: 500 18px/20px var(--mono); }
+.odo > div { display: flex; flex-direction: column; }
+.odo span { height: 20px; display: block; }
+
+/* ---------- Statement ---------- */
+.statement { padding-block: clamp(90px, 14vw, 200px) 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: end; }
+.statement h2 { font-size: clamp(40px, 5.4vw, 84px); line-height: 1; font-weight: 400; letter-spacing: -0.03em; }
+.statement aside { display: grid; gap: 20px; justify-items: start; max-width: 420px; }
+.statement aside p { color: var(--ink); font-size: 17px; max-width: 34ch; }
+.statement .tile { width: 210px; aspect-ratio: 4/3; overflow: hidden; }
+.statement .tile svg { width: 100%; height: 100%; display: block; }
+.marquee { border-block: 1px solid currentColor; overflow: hidden; padding-block: 12px; }
+.marquee_track { display: flex; gap: 48px; width: max-content; animation: marquee 28s linear infinite; }
+.marquee_track span { white-space: nowrap; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ---------- Process (rolling wheel) ---------- */
+.process_long { height: 420vh; position: relative; }
+.process_sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: flex; flex-direction: column; }
+.process_head { display: grid; grid-template-columns: 1fr 1fr auto; align-items: start; gap: 16px; padding-block: 28px 0; }
+.process_head p { font-size: 17px; color: var(--ink); max-width: 30ch; }
+.ab { display: flex; gap: 70px; }
+.badge { width: 128px; height: 128px; display: block; color: var(--cobalt); }
+.badge text { font: 500 11.5px var(--mono); letter-spacing: .2em; fill: currentColor; }
+.badge:hover .badge_core { fill: var(--cobalt); }
+.badge:hover .badge_arrow { stroke: var(--porcelain); }
+.badge_core { fill: transparent; stroke: currentColor; transition: fill .3s; }
+.badge_arrow { stroke: currentColor; transition: stroke .3s; }
+.cards { margin-top: auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; height: 58vh; align-items: start; }
+.card { background: var(--cobalt); color: var(--porcelain); height: 100%; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; will-change: transform; }
+.card h3 { font-size: clamp(22px, 1.9vw, 30px); font-weight: 400; line-height: 1.02; letter-spacing: -0.02em; }
+.card p { font-size: 14px; line-height: 1.35; margin-top: 12px; max-width: 34ch; opacity: .9; }
+#pw-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+
+/* ---------- Pinned collections ---------- */
+.work { position: relative; }
+.case { height: 100vh; height: 100svh; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr); gap: 24px; padding-block: 28px; }
+.case_left { display: flex; flex-direction: column; justify-content: space-between; min-width: 0; }
+.case_title { font-size: clamp(56px, 7.4vw, 124px); line-height: .9; font-weight: 400; letter-spacing: -0.04em; }
+.case_title em { display: block; }
+.work_list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.work_item { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding-block: 10px; border-top: 1px solid currentColor; }
+.work_item b { font-weight: 500; font-size: 18px; }
+.work_item span { align-self: center; }
+.case_intro { font-size: 15px; color: var(--ink); max-width: 36ch; margin-bottom: 18px; }
+.slides { position: relative; overflow: hidden; min-height: 0; }
+.slide_mask { position: absolute; inset: 0; overflow: hidden; }
+.slide_art { position: absolute; inset: 0; }
+.slide_art svg { width: 100%; height: 100%; display: block; }
+.slide_cap { position: absolute; left: 16px; bottom: 14px; color: var(--porcelain); z-index: 1; mix-blend-mode: normal; }
+
+/* ---------- Rough to round track ---------- */
+.round { padding-block: clamp(90px, 12vw, 170px) 40px; }
+.round_head { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: end; }
+.round_head h2 { font-size: clamp(36px, 4.4vw, 68px); font-weight: 400; line-height: 1; letter-spacing: -0.03em; }
+.round_head p { color: var(--ink); font-size: 17px; max-width: 38ch; }
+.track { position: relative; height: 240px; margin-top: 56px; border-bottom: 1px dashed currentColor; touch-action: pan-y; cursor: ew-resize; }
+.track_shape { position: absolute; left: 0; bottom: 10px; width: 220px; height: 220px; overflow: visible; color: var(--cobalt); z-index: 1; }
+.track_shape path { fill: var(--cobalt); }
+.trail-clone { position: absolute; bottom: 10px; color: var(--cobalt); }
+.track_label { position: absolute; left: 0; bottom: 100px; z-index: 2; color: var(--porcelain); pointer-events: none; width: 220px; text-align: center; }
+.track_ticks { display: flex; justify-content: space-between; margin-top: 10px; }
+
+/* ---------- Focus + classes ---------- */
+.focus_long { position: relative; }
+.focus { min-height: 100vh; min-height: 100svh; position: relative; overflow: hidden; display: grid; place-items: center; background: #5A78D8; padding-block: 80px; }
+.focus_bg { position: absolute; inset: -20%; background:
+  radial-gradient(30% 35% at 12% 12%, rgba(241,243,239,.55), transparent 70%),
+  radial-gradient(45% 50% at 78% 70%, rgba(184,210,194,.9), transparent 70%),
+  radial-gradient(55% 60% at 55% 40%, rgba(35,64,184,.7), transparent 70%),
+  radial-gradient(60% 60% at 20% 90%, rgba(35,64,184,.45), transparent 70%);
+  filter: blur(40px); animation: drift 18s ease-in-out infinite alternate; }
+@keyframes drift { to { transform: translate3d(4%, -3%, 0) rotate(8deg) scale(1.05); } }
+.focus_h { position: relative; z-index: 1; text-align: center; color: var(--paper); font-size: clamp(44px, 5.6vw, 92px); line-height: .98; font-weight: 400; letter-spacing: -0.03em; }
+.tickets { position: absolute; z-index: 2; inset: auto 0 0 0; display: flex; justify-content: center; gap: 18px; padding-bottom: 7vh; flex-wrap: wrap; }
+.ticket { text-align: left; width: min(320px, 100%); background: var(--paper); color: var(--cobalt); border-radius: 14px; padding: 18px 18px 14px; box-shadow: 0 30px 60px -30px rgba(20,24,51,.45); display: grid; gap: 10px; position: relative; }
+.ticket h3 { font-family: var(--italic); font-style: italic; font-weight: 400; font-size: 28px; font-variation-settings: "SOFT" 100, "WONK" 1; }
+.ticket p { font-size: 14px; color: var(--ink); }
+.ticket ul { margin: 0; padding: 0 0 0 16px; font-size: 13.5px; color: var(--ink); }
+.ticket .perf { border-top: 2px dashed var(--celadon); margin-inline: -18px; }
+.price { display: flex; justify-content: space-between; font-variant-numeric: tabular-nums; }
+.price b { font: 500 15px var(--mono); }
+.barcode { height: 44px; }
+.ticket small { font: 400 10.5px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+/* ---------- Studio desktop ---------- */
+.desk { position: relative; height: 100vh; height: 100svh; min-height: 640px; overflow: hidden; color: var(--ink);
+  background: linear-gradient(180deg, #1B2B7A 0%, #3B4FB0 38%, #C97A5A 78%, #E8A26A 100%); }
+.desk_sun { position: absolute; left: 50%; bottom: -38vh; width: 90vh; height: 90vh; transform: translateX(-50%); border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,214,160,.95) 0%, rgba(232,118,58,.7) 35%, rgba(232,118,58,0) 70%); }
+.menubar { position: absolute; z-index: 2; inset: 0 0 auto 0; height: 30px; display: flex; justify-content: space-between; align-items: center; background: rgba(250,251,248,.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); font: 500 12px var(--mono); }
+.icons { position: absolute; right: max(var(--gutter), env(safe-area-inset-right, 0px)); top: 54px; display: grid; gap: 18px; z-index: 1; }
+.icon { display: grid; justify-items: center; gap: 6px; background: none; border: 0; padding: 4px; cursor: pointer; color: var(--paper); font: 500 11px var(--mono); width: 84px; }
+.icon svg { width: 46px; height: 46px; }
+.win { position: absolute; width: min(400px, calc(100vw - 32px)); background: var(--paper); border-radius: 10px; box-shadow: 0 30px 80px -20px rgba(20,24,51,.55); overflow: hidden; }
+.win_bar { display: flex; align-items: center; gap: 10px; padding: 9px 12px; background: var(--porcelain); cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; }
+.win_bar:active { cursor: grabbing; }
+.win_bar b { font: 500 12px var(--mono); flex: 1; text-align: center; margin-right: 46px; color: var(--cobalt); }
+.dots { display: flex; gap: 6px; }
+.dots button, .dots i { width: 12px; height: 12px; border-radius: 50%; border: 0; padding: 0; display: block; background: #D4D8E4; }
+.dots button { background: var(--ember); cursor: pointer; }
+.win_body { padding: 16px 18px 18px; font-size: 14px; max-height: 52vh; overflow: auto; }
+.faq dt { font-weight: 600; color: var(--cobalt); margin-top: 12px; }
+.faq dt:first-child { margin-top: 0; }
+.faq dd { margin: 4px 0 0; }
+.log { width: 100%; border-collapse: collapse; font: 12px var(--mono); font-variant-numeric: tabular-nums; }
+.log th, .log td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--porcelain); }
+.log th { color: var(--muted); font-weight: 400; }
+.note { font-family: var(--italic); font-style: italic; font-size: 19px; line-height: 1.3; color: var(--cobalt); font-variation-settings: "SOFT" 100, "WONK" 1; }
+
+/* ---------- Footer ---------- */
+footer { padding-block: 60px 24px; }
+.foot_grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: 28px; font-size: 15px; color: var(--ink); }
+.foot_grid h4 { margin: 0 0 8px; font: 500 12px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--cobalt); }
+.fine { margin-top: 40px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--muted); }
+.fine a { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 991px) {
+  .case { height: auto; grid-template-columns: 1fr; }
+  .case_left { gap: 28px; }
+  .slides { display: flex; gap: 6px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  .slide_mask { position: relative; flex: 0 0 85%; aspect-ratio: 4 / 3; scroll-snap-align: start; }
+  .tickets { position: relative; padding-bottom: 0; margin-top: 40px; }
+  .focus { display: block; text-align: center; }
+}
+@media (max-width: 767px) {
+  .hero_bar { grid-template-columns: 1fr; gap: 6px; }
+  .hero_main { grid-template-columns: 1fr; margin-top: 64px; }
+  .hero_h1 { grid-column: 1; }
+  .strip { grid-template-columns: repeat(3, 1fr); }
+  .strip > div:nth-child(n+4) { display: none; }
+  .statement, .round_head { grid-template-columns: 1fr; }
+  .process_long { height: 380vh; }
+  .process_head { grid-template-columns: 1fr auto; }
+  .ab { display: none; }
+  .badge { width: 96px; height: 96px; }
+  .cards { grid-template-columns: 1fr 1fr; height: 62vh; grid-template-rows: 1fr 1fr; }
+  .card p { display: none; }
+  .track { height: 170px; }
+  .track_shape, .track_label { width: 150px; }
+  .track_shape { height: 150px; }
+  .track_label { bottom: 68px; }
+  .foot_grid { grid-template-columns: 1fr 1fr; }
+  .icons { top: auto; bottom: 20px; grid-auto-flow: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee_track, .focus_bg, .firing i { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="loader mono" aria-hidden="true">
+  <div class="odo"><div id="strip-h"></div><div id="strip-t"></div><div id="strip-o"></div></div><span>%</span>
+</div>
+
+<header class="hero wrap" id="top">
+  <h1 class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">ROND ceramics studio, Cape Town</h1>
+  <svg class="logo" viewBox="0 -4 1160 252" aria-hidden="true">
+    <!-- R -->
+    <rect class="logo_piece" x="0" y="0" width="44" height="240"/>
+    <path class="logo_piece" d="M44 0H180A72 72 0 0 1 180 144H44V100H176A28 28 0 0 0 176 44H44Z"/>
+    <path class="logo_piece" d="M146 144H198L292 240H240Z"/>
+    <!-- O: morphs on a loop -->
+    <path class="logo_piece" id="o-shape" d=""/>
+    <!-- N -->
+    <rect class="logo_piece" x="616" y="0" width="44" height="240"/>
+    <path class="logo_piece" d="M616 0H668L874 240H822Z"/>
+    <rect class="logo_piece" x="830" y="0" width="44" height="240"/>
+    <!-- D -->
+    <rect class="logo_piece" x="916" y="0" width="44" height="240"/>
+    <path class="logo_piece" d="M960 0H1040A120 120 0 0 1 1040 240H960V196H1036A76 76 0 0 0 1036 44H960Z"/>
+  </svg>
+
+  <div class="hero_bar">
+    <span>Ceramics studio &amp; kiln, Woodstock</span>
+    <nav aria-label="Main">
+      <a href="#process">Process</a><a href="#work">Collections</a><a href="#classes">Classes</a><a href="#visit">Visit</a>
+    </nav>
+    <a class="hero_mail" href="mailto:hello@rond.studio">hello@rond.studio</a>
+  </div>
+
+  <div class="hero_main">
+    <p class="hero_h1">We make pots for<br>people who use them<br><em>every single day</em></p>
+  </div>
+
+  <div class="strip" id="strip"></div>
+
+  <div class="hero_foot mono">
+    <span id="clock">Cape Town --:--:--</span>
+    <span class="firing"><i></i>Kiln firing now</span>
+  </div>
+</header>
+
+<section class="statement wrap" aria-labelledby="st-h">
+  <h2 id="st-h" data-reveal="blur">Your mug isn't an ornament. It's the first thing you hold <em>every morning.</em></h2>
+  <aside>
+    <div class="tile" id="st-tile"></div>
+    <p data-reveal="blur">We throw, trim, glaze and fire everything in one room on Albert Road. Small batches, local clay, and a glaze book we've been filling since 2016.</p>
+  </aside>
+</section>
+
+<div class="marquee mono" aria-hidden="true">
+  <div class="marquee_track">
+    <span>Wedge</span><span>+</span><span>Throw</span><span>+</span><span>Trim</span><span>+</span><span>Glaze</span><span>+</span><span>Fire</span><span>=</span><span>Round</span><span>·</span>
+    <span>Wedge</span><span>+</span><span>Throw</span><span>+</span><span>Trim</span><span>+</span><span>Glaze</span><span>+</span><span>Fire</span><span>=</span><span>Round</span><span>·</span>
+  </div>
+</div>
+
+<section id="process" aria-label="Process">
+  <div class="process_long" id="pw_long">
+    <div class="process_sticky" id="pw-sticky">
+      <div class="process_head wrap">
+        <div class="ab mono" aria-hidden="true"><span>Lump</span><span>→</span><span>Pot</span></div>
+        <p data-reveal="blur">Clay starts <em>lumpy.</em> We keep the wheel <em>turning</em> until it comes out round.</p>
+        <a class="badge" href="#classes" aria-label="Book a class">
+          <svg viewBox="0 0 128 128" class="badge" id="badge" aria-hidden="true">
+            <defs><path id="ring" d="M64 64m-50 0a50 50 0 1 1 100 0a50 50 0 1 1 -100 0"/></defs>
+            <text><textPath href="#ring" startOffset="0">Book a class · Book a class · Book a class ·</textPath></text>
+            <circle class="badge_core" cx="64" cy="64" r="30"/>
+            <path class="badge_arrow" d="M54 74L74 54M60 54H74V68" fill="none" stroke-width="1.5"/>
+          </svg>
+        </a>
+      </div>
+      <div class="cards wrap">
+        <article class="card"><span class="mono">01</span><div><h3>Wedge &amp;<br><em>centre</em></h3><p>We knead air out of the clay, then press it dead-centre on the wheel. Every wobble later starts here.</p></div></article>
+        <article class="card"><span class="mono">02</span><div><h3>Throw &amp;<br><em>pull</em></h3><p>Three pulls lift the walls to height. A mug wall ends near 5 mm, so it's light in the hand but survives a dishwasher.</p></div></article>
+        <article class="card"><span class="mono">03</span><div><h3>Trim &amp;<br><em>glaze</em></h3><p>At leather-hard we carve the foot, bisque at 1000 °C, then dip in glazes we mix by the gram.</p></div></article>
+        <article class="card"><span class="mono">04</span><div><h3>Fire &amp;<br><em>finish</em></h3><p>Glaze firing to cone 6, about 1222 °C, then a slow cool overnight. We sand every foot before it leaves.</p></div></article>
+      </div>
+      <canvas id="pw-canvas" aria-hidden="true"></canvas>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="work" aria-label="Collections">
+  <div class="case wrap" id="case">
+    <div class="case_left">
+      <h2 class="case_title">Selected<em>Collections</em></h2>
+      <div>
+        <p class="case_intro" data-reveal="blur">Five runs from the last two years. Most are sold out; the studio shelf restocks on the first Saturday of the month.</p>
+        <ul class="work_list" id="work-list"></ul>
+      </div>
+    </div>
+    <div class="slides" id="slides"></div>
+  </div>
+</section>
+
+<section class="round wrap" aria-labelledby="round-h">
+  <div class="round_head">
+    <h2 id="round-h" data-reveal="blur">From rough to <em>round</em> in six turns</h2>
+    <p data-reveal="blur">Every piece goes through the same corners before it softens. Move along the line to watch a lump become a pot. On a phone, drag the shape.</p>
+  </div>
+  <div class="track" id="track">
+    <svg class="track_shape" id="track-shape" viewBox="0 0 220 220" aria-hidden="true"><path id="track-path" d=""/></svg>
+    <span class="track_label mono" id="track-label">0% round</span>
+  </div>
+  <div class="track_ticks mono" aria-hidden="true"><span>Lump</span><span>Centred</span><span>Pulled</span><span>Trimmed</span><span>Fired</span><span>Round</span></div>
+</section>
+
+<section class="focus_long" id="classes" aria-labelledby="focus-h">
+  <div class="focus" id="focus">
+    <div class="focus_bg" aria-hidden="true"></div>
+    <h2 class="focus_h" id="focus-h">We keep our focus on<br><em>what's on the wheel</em></h2>
+    <div class="tickets" id="tickets"></div>
+  </div>
+</section>
+
+<section class="desk" id="visit" aria-label="Studio desk">
+  <div class="desk_sun" aria-hidden="true"></div>
+  <div class="menubar wrap"><span>ROND studio</span><span id="desk-clock">--</span></div>
+  <div class="icons" id="icons">
+    <button class="icon" data-win="faq"><svg viewBox="0 0 46 46" aria-hidden="true"><path d="M10 4h20l8 8v30H10z" fill="#FAFBF8"/><path d="M30 4v8h8" fill="#D4D8E4"/><path d="M16 22h16M16 28h16M16 34h10" stroke="#2340B8" stroke-width="2"/></svg>FAQ.txt</button>
+    <button class="icon" data-win="log"><svg viewBox="0 0 46 46" aria-hidden="true"><path d="M4 12h14l4 4h20v24H4z" fill="#B8D2C2"/><path d="M4 18h38v22H4z" fill="#8FB9A0"/></svg>Kiln log</button>
+    <button class="icon" data-win="note"><svg viewBox="0 0 46 46" aria-hidden="true"><rect x="6" y="6" width="34" height="34" rx="3" fill="#FAFBF8"/><path d="M12 30q11-18 22 0" fill="#E8763A"/><circle cx="31" cy="15" r="4" fill="#2340B8"/></svg>Thandi.png</button>
+    <button class="icon" data-win="visit"><svg viewBox="0 0 46 46" aria-hidden="true"><path d="M23 4c8 0 14 6 14 14 0 10-14 24-14 24S9 28 9 18C9 10 15 4 23 4z" fill="#E8763A"/><circle cx="23" cy="18" r="5" fill="#FAFBF8"/></svg>Visit.map</button>
+  </div>
+
+  <div class="win" id="win-faq" style="left:4%;top:70px">
+    <div class="win_bar"><div class="dots"><button aria-label="Close FAQ"></button><i></i><i></i></div><b>FAQ.txt</b></div>
+    <dl class="win_body faq">
+      <dt>I've never touched clay. Can I join?</dt><dd>Yes. The Taster evening is built for first-timers. You leave with two pieces, fired and posted two weeks later.</dd>
+      <dt>Are the pots food safe?</dt><dd>All our glazes are lead-free and fired to cone 6. Dishwasher and microwave are fine; the oven isn't.</dd>
+      <dt>Do you take commissions?</dt><dd>For restaurants and hotels, from 40 pieces. Lead time is about ten weeks, because every batch fires twice.</dd>
+      <dt>Can I fire my own work here?</dt><dd>Members get shelf space in every firing. Non-members pay R4 per cubic centimetre of kiln space.</dd>
+    </dl>
+  </div>
+
+  <div class="win" id="win-log" style="left:36%;top:150px">
+    <div class="win_bar"><div class="dots"><button aria-label="Close kiln log"></button><i></i><i></i></div><b>Kiln-log.md</b></div>
+    <div class="win_body">
+      <table class="log">
+        <thead><tr><th>Firing</th><th>Type</th><th>Peak</th><th>Load</th></tr></thead>
+        <tbody>
+          <tr><td>0412</td><td>Glaze</td><td>1222 °C</td><td>Tidal bowls</td></tr>
+          <tr><td>0411</td><td>Bisque</td><td>1000 °C</td><td>Class work</td></tr>
+          <tr><td>0410</td><td>Glaze</td><td>1222 °C</td><td>Salt &amp; Smoke</td></tr>
+          <tr><td>0409</td><td>Glaze</td><td>1186 °C</td><td>Test tiles</td></tr>
+          <tr><td>0408</td><td>Bisque</td><td>1000 °C</td><td>Mugs, 64 pcs</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="win" id="win-note" style="left:12%;top:330px" hidden>
+    <div class="win_bar"><div class="dots"><button aria-label="Close note"></button><i></i><i></i></div><b>Thandi.png</b></div>
+    <div class="win_body"><p class="note">"I came for one evening and stayed for three terms. My bowls are still a bit wonky. I use them every day anyway."</p><p class="mono" style="margin-top:12px;font-size:11px">Thandi M., member since 2024</p></div>
+  </div>
+
+  <div class="win" id="win-visit" style="left:52%;top:90px" hidden>
+    <div class="win_bar"><div class="dots"><button aria-label="Close visit"></button><i></i><i></i></div><b>Visit.map</b></div>
+    <div class="win_body"><p><strong>ROND Studio</strong><br>Unit 4, 120 Albert Road<br>Woodstock, Cape Town 7925</p><p style="margin-top:10px">Shop open Thu to Sat, 10:00 to 16:00. Classes run Tue and Wed evenings.</p></div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <svg class="logo" viewBox="0 -4 1160 252" aria-hidden="true"><use href="#none"/></svg>
+  <div class="foot_grid">
+    <div><h4>Studio</h4>Unit 4, 120 Albert Road<br>Woodstock, Cape Town</div>
+    <div><h4>Shop hours</h4>Thu to Sat<br>10:00 to 16:00</div>
+    <div><h4>Write to us</h4><a href="mailto:hello@rond.studio">hello@rond.studio</a></div>
+    <div><h4>Local time</h4><span id="foot-clock" class="mono" style="font-size:14px">--</span></div>
+  </div>
+  <div class="fine mono">
+    <span>ROND is a fictional studio, made as a motion study.</span>
+    <span>Animation inspired by <a href="https://neutomni.com" target="_blank" rel="noopener">neutomni.com</a></span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/MorphSVGPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script>
+(function () {
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+  const root = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = matchMedia('(max-width: 767px)').matches;
+  if (typeof gsap === 'undefined') { root.classList.remove('intro'); return; }
+  gsap.registerPlugin(ScrollTrigger, SplitText, MorphSVGPlugin);
+
+  /* ---------- Generated pottery art ---------- */
+  // Profiles are [t, radius] pairs from rim (t=0) to foot (t=1); h is height relative to width.
+  const VESSELS = {
+    bowl:   { h: 0.48, p: [[0, 1], [0.35, 0.95], [0.75, 0.7], [1, 0.36]] },
+    mug:    { h: 0.82, p: [[0, 0.6], [0.5, 0.62], [1, 0.56]], handle: true },
+    vase:   { h: 1.25, p: [[0, 0.3], [0.12, 0.22], [0.3, 0.34], [0.62, 0.72], [0.9, 0.5], [1, 0.36]] },
+    bottle: { h: 1.3,  p: [[0, 0.13], [0.3, 0.14], [0.46, 0.5], [0.8, 0.56], [1, 0.44]] },
+    plate:  { h: 0.14, p: [[0, 1], [0.35, 0.97], [1, 0.58]], tilt: 0.3 }
+  };
+  let gid = 0;
+  function radiusAt(p, t) {
+    for (let i = 1; i < p.length; i++) {
+      if (t <= p[i][0]) {
+        const [t0, r0] = p[i - 1], [t1, r1] = p[i];
+        const k = (1 - Math.cos(Math.PI * (t - t0) / (t1 - t0))) / 2;
+        return r0 + (r1 - r0) * k;
+      }
+    }
+    return p[p.length - 1][1];
+  }
+  function art(kind, glaze, bg, opts = {}) {
+    const v = VESSELS[kind], W = opts.w || 800, H = opts.h || 600, id = 'g' + (++gid);
+    const maxH = H * 0.62, half = Math.min(W * 0.2, maxH / v.h / 2);
+    const h = half * 2 * v.h, cx = W / 2, top = H * 0.82 - h, N = 40;
+    const right = [], left = [];
+    for (let i = 0; i <= N; i++) {
+      const t = i / N, r = radiusAt(v.p, t) * half, y = top + t * h;
+      right.push((cx + r).toFixed(1) + ' ' + y.toFixed(1));
+      left.unshift((cx - r).toFixed(1) + ' ' + y.toFixed(1));
+    }
+    const body = 'M' + right.join('L') + 'L' + left.join('L') + 'Z';
+    const handle = v.handle ? `<path d="M${cx + half * 0.6} ${top + h * 0.22}c${half * 0.55} 0 ${half * 0.55} ${h * 0.5} 0 ${h * 0.5}" fill="none" stroke="${glaze[1]}" stroke-width="${half * 0.13}" stroke-linecap="round"/>` : '';
+    const rr = radiusAt(v.p, 0) * half, tilt = v.tilt || 0.16;
+    // Plates show their glazed face; everything else shows a shadowed opening.
+    const rim = v.tilt
+      ? `<ellipse cx="${cx}" cy="${top}" rx="${rr}" ry="${rr * tilt}" fill="${glaze[0]}"/><ellipse cx="${cx}" cy="${top + rr * tilt * 0.08}" rx="${rr * 0.62}" ry="${rr * tilt * 0.6}" fill="${glaze[1]}" opacity=".45"/>`
+      : `<ellipse cx="${cx}" cy="${top}" rx="${rr}" ry="${Math.max(3, rr * tilt)}" fill="${glaze[1]}" opacity=".55"/>`;
+    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="${glaze[0]}"/><stop offset=".8" stop-color="${glaze[1]}"/>
+          <stop offset=".8" stop-color="#C9A88A"/><stop offset="1" stop-color="#B08D6E"/>
+        </linearGradient>
+        <radialGradient id="${id}h" cx=".3" cy=".35" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+      </defs>
+      <rect width="${W}" height="${H}" fill="${bg[0]}"/>
+      <rect y="${H * 0.82}" width="${W}" height="${H * 0.18}" fill="${bg[1]}"/>
+      <ellipse cx="${cx + half * 0.25}" cy="${H * 0.825}" rx="${half * 1.3}" ry="${half * 0.12}" fill="#141833" opacity=".18"/>
+      ${handle}<path d="${body}" fill="url(#${id})"/><path d="${body}" fill="url(#${id}h)"/>${rim}
+    </svg>`;
+  }
+
+  const COLLECTIONS = [
+    { name: 'Tidal bowls', tags: 'Bowls · 2026', kind: 'bowl', glaze: ['#3E63D6', '#1B2E86'], bg: ['#DCE6E0', '#C6D3CB'] },
+    { name: 'Kommetjie mugs', tags: 'Mugs · 2025', kind: 'mug', glaze: ['#F1EFE6', '#C9CFC2'], bg: ['#2340B8', '#1B3194'] },
+    { name: 'Fynbos vases', tags: 'Vases · 2025', kind: 'vase', glaze: ['#9DBFA8', '#557A62'], bg: ['#EEE6DA', '#DCCFBD'] },
+    { name: 'Ash-glaze plates', tags: 'Tableware · 2025', kind: 'plate', glaze: ['#D9C9A6', '#8F7F5F'], bg: ['#1F2547', '#161A35'] },
+    { name: 'Salt & Smoke service', tags: 'Commission · 2026', kind: 'bottle', glaze: ['#E8763A', '#9E3E1A'], bg: ['#F3F1EA', '#E2DED2'] }
+  ];
+
+  $('#strip').innerHTML = [
+    ['bowl', ['#3E63D6', '#1B2E86'], ['#DCE6E0', '#C6D3CB']],
+    ['vase', ['#F1EFE6', '#BFC6B9'], ['#2340B8', '#1B3194']],
+    ['mug', ['#9DBFA8', '#557A62'], ['#EEE6DA', '#DCCFBD']],
+    ['bottle', ['#E8763A', '#9E3E1A'], ['#1F2547', '#161A35']],
+    ['plate', ['#2340B8', '#172C8A'], ['#F3F1EA', '#E2DED2']],
+    ['vase', ['#D9C9A6', '#8F7F5F'], ['#B8D2C2', '#9FBFAA']]
+  ].map(a => '<div>' + art(a[0], a[1], a[2], { w: 400, h: 500 }) + '</div>').join('');
+  $('#st-tile').innerHTML = art('mug', ['#3E63D6', '#1B2E86'], ['#B8D2C2', '#9FBFAA'], { w: 400, h: 300 });
+
+  $('#work-list').innerHTML = COLLECTIONS.map(c => `<li class="work_item"><b>${c.name.replace('&', '&amp;')}</b><span class="mono">${c.tags}</span></li>`).join('');
+  $('#slides').innerHTML = COLLECTIONS.map((c, i) => `<div class="slide_mask" style="z-index:${i + 1}"><div class="slide_art">${art(c.kind, c.glaze, c.bg)}</div><span class="slide_cap mono" style="color:${i % 2 ? '#F1F3EF' : '#141833'}">${String(i + 1).padStart(2, '0')} / ${String(COLLECTIONS.length).padStart(2, '0')}</span></div>`).join('');
+
+  /* ---------- Tickets ---------- */
+  const CLASSES = [
+    { name: 'Taster', copy: 'One evening on the wheel for first-timers. We trim and fire your best two pieces.', items: ['3 hours, Tue or Wed', 'Clay, glaze and firing included', 'Max 8 people'], price: 'R650', foot: 'Per person, wine included' },
+    { name: 'Six-week term', copy: 'From centring to glazing, one evening a week. Most people leave with a set of four.', items: ['6 × 3-hour sessions', '10 kg clay + 2 glaze firings', 'Open-studio Saturdays'], price: 'R3 900', foot: 'Next term starts 3 Nov' },
+    { name: 'Membership', copy: 'Your own shelf, a wheel when you want it and space in every glaze firing.', items: ['24/7 key access', 'Shelf + glaze library', 'Firing at cost'], price: 'R1 450', foot: 'Per month, 3-month minimum' }
+  ];
+  function barcode(seed) {
+    let x = 0, s = 0, stops = [];
+    for (const ch of seed) s = (s * 31 + ch.charCodeAt(0)) % 9973;
+    while (x < 100) {
+      s = (s * 7919 + 13) % 9973;
+      const w = 0.6 + (s % 5) * 0.5, gap = 0.5 + (s % 3) * 0.6;
+      stops.push(`#2340B8 ${x}% ${Math.min(100, x + w)}%`, `transparent ${Math.min(100, x + w)}% ${Math.min(100, x + w + gap)}%`);
+      x += w + gap;
+    }
+    return `linear-gradient(90deg, ${stops.join(',')})`;
+  }
+  $('#tickets').innerHTML = CLASSES.map((c, i) => `<article class="ticket">
+    <h3>${c.name}</h3><p>${c.copy}</p><ul>${c.items.map(t => `<li>${t}</li>`).join('')}</ul>
+    <div class="perf"></div>
+    <div class="price"><span class="mono" style="font-size:11px">Price from</span><b>${c.price}</b></div>
+    <div class="barcode" style="background:${barcode(c.name)}" role="img" aria-label="Ticket barcode"></div>
+    <small>${c.foot} · Firing no. 04${13 + i}</small></article>`).join('');
+
+  /* ---------- Clock (Cape Town) ---------- */
+  const tz = 'Africa/Johannesburg';
+  function tick() {
+    const now = new Date();
+    const t = now.toLocaleTimeString('en-GB', { timeZone: tz, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    $('#clock').textContent = 'Cape Town ' + t + ' (GMT+2)';
+    $('#foot-clock').textContent = t + ' SAST';
+    $('#desk-clock').textContent = now.toLocaleDateString('en-GB', { timeZone: tz, weekday: 'short', day: 'numeric', month: 'short' }) + '  ' + t.slice(0, 5);
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* ---------- Footer wordmark reuses the hero paths ---------- */
+  const footLogo = $('footer .logo');
+  footLogo.innerHTML = $('.hero .logo').innerHTML.replace(/ id="o-shape"/, ' data-foot-o');
+
+  /* ---------- Smooth scroll (Lenis drives ScrollTrigger) ---------- */
+  let lenis = null;
+  if (!reduce && typeof Lenis !== 'undefined') {
+    lenis = new Lenis({ lerp: isMobile ? 0.3 : 0.07 });
+    window.lenis = lenis;
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+  $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+    const target = document.getElementById(a.getAttribute('href').slice(1));
+    if (!target) return;
+    e.preventDefault();
+    if (lenis) lenis.scrollTo(target, { duration: 1.4 }); else target.scrollIntoView();
+  }));
+
+  /* ---------- Morphing "O" (shapes rotate around the letter's centre) ---------- */
+  function poly(n, r, cx, cy, rot = -Math.PI / 2) {
+    let d = '';
+    for (let i = 0; i < n; i++) {
+      const a = rot + (2 * Math.PI * i) / n;
+      d += (i ? 'L' : 'M') + (cx + r * Math.cos(a)).toFixed(2) + ' ' + (cy + r * Math.sin(a)).toFixed(2);
+    }
+    return d + 'Z';
+  }
+  const circ = (r, cx, cy) => `M${cx - r} ${cy}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0Z`;
+  const OX = 455, OY = 120;
+  const oShapes = [circ(112, OX, OY), poly(4, 140, OX, OY, -Math.PI / 4), poly(3, 138, OX, OY + 22), poly(6, 120, OX, OY), poly(5, 122, OX, OY + 8), poly(8, 118, OX, OY)];
+  $('#o-shape').setAttribute('d', oShapes[0]);
+  $('[data-foot-o]').setAttribute('d', oShapes[0]);
+  function oLoop(el) {
+    const tl = gsap.timeline({ repeat: -1, delay: 1 });
+    [1, 2, 3, 4, 5, 0].forEach((s, i) => {
+      tl.to(el, { duration: 1, morphSVG: { shape: oShapes[s], shapeIndex: 'auto' }, rotation: (i + 1) * 60, svgOrigin: OX + ' ' + OY, ease: 'power2.inOut' }, '+=0.6');
+    });
+    tl.set(el, { rotation: 0, svgOrigin: OX + ' ' + OY });
+    return tl;
+  }
+  if (!reduce) { oLoop($('#o-shape')); oLoop($('[data-foot-o]')); }
+
+  /* ---------- Intro: odometer, letters drop from centre, hero lines blur in ---------- */
+  const DIGIT_H = 20;
+  const fill = (el, digits) => { el.innerHTML = digits.map(d => `<span>${d}</span>`).join(''); };
+  const tens = [], ones = [];
+  for (let i = 0; i < 11; i++) for (let d = 0; d <= 9; d++) tens.push(d);
+  for (let i = 0; i < 21; i++) ones.push(i % 2 ? 5 : 0);
+  fill($('#strip-h'), [0, 1]); fill($('#strip-t'), tens); fill($('#strip-o'), ones);
+
+  function intro() {
+    const pieces = $$('.hero .logo_piece');
+    const loader = $('.loader');
+    const delay = isMobile ? 1 : 2.4;
+    if (reduce) { root.classList.remove('intro'); loader.remove(); return; }
+    gsap.set(pieces, { y: -320 });
+    gsap.set('.strip', { scale: 0 });
+    gsap.set('.hero_foot', { y: 30, opacity: 0 });
+    gsap.set('.hero_bar nav', { y: 20, opacity: 0 });
+    const split = SplitText.create('.hero_h1', { type: 'lines', linesClass: 'line' });
+    gsap.set(split.lines, { opacity: 0, filter: 'blur(10px)', y: 15 });
+    root.classList.remove('intro');
+    gsap.to(pieces, { y: 0, duration: 2, ease: 'power1.out', stagger: { each: 0.05, from: 'center' } });
+    const proxy = { v: 0 };
+    gsap.to(proxy, { v: 100, duration: delay, ease: 'power2.inOut', onUpdate() {
+      gsap.set('#strip-h', { y: -(proxy.v / 100) * DIGIT_H });
+      gsap.set('#strip-t', { y: -(proxy.v / 10) * DIGIT_H });
+      gsap.set('#strip-o', { y: -(proxy.v / 5) * DIGIT_H });
+    }, onComplete() { gsap.to(loader, { opacity: 0, y: 10, duration: .4, delay: .2, onComplete: () => loader.remove() }); } });
+    gsap.timeline({ delay })
+      .to('.hero_bar nav', { y: 0, opacity: 1, duration: .3, ease: 'power1.out', clearProps: 'transform' }, 0)
+      .to(split.lines, { opacity: 1, filter: 'blur(0px)', y: 0, duration: .6, ease: 'power1.out', stagger: .1 }, .2)
+      .to('.strip', { scale: 1, duration: .8, ease: 'power1.out' }, .4)
+      .to('.hero_foot', { y: 0, opacity: 1, duration: .6, ease: 'power1.out' }, 1);
+  }
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(intro, intro);
+
+  /* ---------- Blur reveal on scroll ---------- */
+  if (!reduce) (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => {
+    $$('[data-reveal="blur"]').forEach(el => {
+      SplitText.create(el, { type: 'lines', linesClass: 'line', autoSplit: true, onSplit(self) {
+        return gsap.fromTo(self.lines, { opacity: 0, filter: 'blur(10px)', y: 15 }, {
+          opacity: 1, filter: 'blur(0px)', y: 0, duration: .4, ease: 'power1.out', stagger: .12, overwrite: true,
+          scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+        });
+      } });
+    });
+    ScrollTrigger.refresh();
+  });
+
+  /* ---------- Process: a polygon rolls over a catenary road and rounds into a circle ---------- */
+  (function rollingWheel() {
+    const outer = $('#pw_long'), sticky = $('#pw-sticky'), canvas = $('#pw-canvas'), ctx = canvas.getContext('2d');
+    const cardsEl = $('.cards'), cards = $$('.card');
+    const N_MIN = 4, N_MAX = 12, PHASE2 = 0.3, SMOOTHING = 0.2, EPS = 0.0005;
+    const COLOR = '#F1F3EF';
+    let W, H, R, scrollable = 0, xLeft = 0, xRight = 0, tEntry = 0, roadBase = 0, mobile = false;
+    let target = 0, progress = 0, raf = null;
+    const smooth = t => t * t * (3 - 2 * t);
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const cache = {};
+    function ideal(n, r) {
+      let b = cache[n];
+      if (!b) { b = new Float64Array(n * 2); for (let i = 0; i < n; i++) { const a = Math.PI / 2 + 2 * Math.PI * i / n; b[i * 2] = Math.cos(a); b[i * 2 + 1] = Math.sin(a); } cache[n] = b; }
+      return b.map(x => x * r);
+    }
+    function aligned(n, r, rx, ry) {
+      const raw = ideal(n, r), ref = Math.atan2(ry, rx);
+      let best = 0, bd = Infinity;
+      for (let o = 0; o < n; o++) { let d = Math.abs(Math.atan2(raw[o * 2 + 1], raw[o * 2]) - ref); if (d > Math.PI) d = 2 * Math.PI - d; if (d < bd) { bd = d; best = o; } }
+      const out = new Float64Array(n * 2);
+      for (let i = 0; i < n; i++) { const s = ((i + best) % n) * 2; out[i * 2] = raw[s]; out[i * 2 + 1] = raw[s + 1]; }
+      return out;
+    }
+    // Vertices for a fractional side count: split one edge, then ease toward the next polygon.
+    function verts(nf, r) {
+      const lo = Math.floor(nf), f = nf - lo;
+      if (f < 1e-9) return ideal(lo, r);
+      const hi = lo + 1, base = ideal(lo, r), start = new Float64Array(hi * 2);
+      start[0] = base[0]; start[1] = base[1]; start[2] = (base[0] + base[2]) / 2; start[3] = (base[1] + base[3]) / 2;
+      for (let i = 2; i < hi; i++) { start[i * 2] = base[(i - 1) * 2]; start[i * 2 + 1] = base[(i - 1) * 2 + 1]; }
+      const tgt = aligned(hi, r, base[0], base[1]), out = new Float64Array(hi * 2);
+      for (let i = 0; i < hi * 2; i++) out[i] = lerp(start[i], tgt[i], f);
+      return out;
+    }
+    function resize() {
+      const dpr = window.devicePixelRatio || 1;
+      W = sticky.clientWidth; H = sticky.clientHeight;
+      canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+      canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+      mobile = W <= 767;
+      const cardTop = cardsEl.offsetTop, firstH = cards[0].offsetHeight;
+      R = Math.min(mobile ? W * 0.13 : Math.min(W, H) * 0.12, firstH * 0.36);
+      roadBase = cardTop + R * 2.4;
+      scrollable = Math.max(0, outer.offsetHeight - window.innerHeight);
+      xLeft = mobile ? R : -R; xRight = W - R;
+      tEntry = mobile ? 0.05 : (2 * R) / (xRight - xLeft);
+      update(); render(progress);
+    }
+    function update() {
+      const raw = scrollable > 0 ? Math.min(1, Math.max(0, -outer.getBoundingClientRect().top) / scrollable) : 0;
+      const off = mobile ? 0 : 0.18;
+      target = Math.max(0, (raw - off) / (1 - off));
+      // Cards start as a staircase and level out as the wheel rounds.
+      const stair = 1 - Math.min(1, raw / 0.55);
+      cards.forEach((c, i) => { c.style.transform = `translate3d(0, ${(mobile ? (i % 2) * 6 : i * 7) * stair}vh, 0)`; });
+      if (reduce) { progress = target; render(progress); return; }
+      if (!raf) raf = requestAnimationFrame(loop);
+    }
+    function loop() {
+      progress = lerp(progress, target, SMOOTHING);
+      if (Math.abs(target - progress) < EPS) progress = target;
+      render(progress);
+      raf = Math.abs(target - progress) >= EPS ? requestAnimationFrame(loop) : null;
+    }
+    function render(p) {
+      const t = Math.min(1, Math.max(0, p)), span = xRight - xLeft, wheelX = lerp(xLeft, xRight, t);
+      const tm = smooth(Math.min(1, Math.max(0, (t - tEntry) / (1 - tEntry))));
+      const tPoly = Math.min(tm / PHASE2, 1), circT = smooth(Math.max(0, (tm - PHASE2) / (1 - PHASE2)));
+      const nf = N_MIN + tPoly * (N_MAX - N_MIN), lo = Math.floor(nf), hi = Math.min(N_MAX, lo + 1), fr = nf - lo;
+      const s = lerp(2 * R * Math.sin(Math.PI / lo), 2 * R * Math.sin(Math.PI / hi), fr);
+      const a = lerp(R * Math.cos(Math.PI / lo), R * Math.cos(Math.PI / hi), fr);
+      const peakY = roadBase, axleY = peakY - (a + (R - a) * circT);
+      ctx.clearRect(0, 0, W, H);
+      // Road: inverted catenary arches, the curve a regular polygon rolls on without its axle bobbing.
+      const first = xLeft + Math.ceil((-xLeft - s) / s) * s, count = Math.ceil((W + s * 2) / s) + 2, steps = Math.max(48, Math.round(s));
+      ctx.beginPath();
+      for (let k = 0; k < count; k++) {
+        const px = first + k * s, left = px - s / 2;
+        for (let j = 0; j <= steps; j++) {
+          const lx = left + (j / steps) * s, cy = peakY + a * Math.cosh((lx - px) / a) - a;
+          const y = cy * (1 - circT) + peakY * circT;
+          j ? ctx.lineTo(lx, y) : ctx.moveTo(lx, y);
+        }
+      }
+      ctx.strokeStyle = COLOR; ctx.lineWidth = 1.5; ctx.stroke();
+      // Wheel
+      const rot = ((t * span) / s) * (2 * Math.PI / nf) - Math.PI / nf, v = verts(nf, R), vc = v.length / 2;
+      ctx.save(); ctx.translate(wheelX, axleY); ctx.rotate(rot); ctx.beginPath();
+      if (circT < 0.999) {
+        const STEPS = mobile ? 90 : 360, per = vc / STEPS;
+        for (let i = 0; i <= STEPS; i++) {
+          const vi = i * per, i0 = Math.floor(vi) % vc, i1 = (i0 + 1) % vc, f = vi - Math.floor(vi);
+          const x = lerp(v[i0 * 2], v[i1 * 2], f), y = lerp(v[i0 * 2 + 1], v[i1 * 2 + 1], f), pr = Math.hypot(x, y), k = lerp(pr, R, circT) / pr;
+          i ? ctx.lineTo(x * k, y * k) : ctx.moveTo(x * k, y * k);
+        }
+        ctx.closePath();
+      } else ctx.arc(0, 0, R, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath(); ctx.arc(0, 0, 3, 0, Math.PI * 2); ctx.fillStyle = COLOR; ctx.fill();
+      ctx.restore();
+      // Axle guide
+      ctx.save(); ctx.strokeStyle = COLOR; ctx.lineWidth = 1; ctx.setLineDash([5, 10]);
+      ctx.beginPath(); ctx.moveTo(0, axleY); ctx.lineTo(W, axleY); ctx.stroke(); ctx.restore();
+    }
+    let dirty = false;
+    window.addEventListener('scroll', () => { if (dirty) return; dirty = true; requestAnimationFrame(() => { dirty = false; update(); }); }, { passive: true });
+    window.addEventListener('resize', resize, { passive: true });
+    window.addEventListener('load', resize);
+    resize();
+  })();
+
+  /* Badge text spins with scroll */
+  gsap.to('#badge text', { rotation: 360, svgOrigin: '64 64', ease: 'none', scrollTrigger: { trigger: '#pw_long', start: 'top bottom', end: 'bottom top', scrub: true } });
+
+  /* ---------- Collections: pinned stack, corner-wipe reveals, label snapping ---------- */
+  gsap.matchMedia().add('(min-width: 992px)', () => {
+    const section = $('#work'), pinEl = $('#case');
+    const items = $$('.work_item'), masks = $$('.slide_mask'), arts = $$('.slide_art');
+    const HIDDEN = 'polygon(100% 100%, 100% 100%, 100% 100%, 100% 100%)';
+    const FULL = 'polygon(0% 0%, 100% 0%, 100% 101%, 0% 101%)';
+    const DIM = 0.28, FADE = 0.28, TRANSITION = 0.9, EASE = 'power2.inOut';
+    const SNAP_FORWARD_AT = 0.1, SNAP_BACK_AT = 0.9, SNAP_DELAY = 90;
+    gsap.set(items, { opacity: DIM });
+    gsap.set(masks, { clipPath: HIDDEN });
+    gsap.set(arts, { scale: 1.1, transformOrigin: '50% 50%', force3D: true });
+    const tl = gsap.timeline({ defaults: { duration: TRANSITION, ease: EASE } });
+    tl.addLabel('top', 0).to(masks[0], { clipPath: FULL }, 0).to(arts[0], { scale: 1, ease: 'none' }, 0).to(items[0], { opacity: 1, duration: FADE, ease: 'none' }, 0).addLabel('s0', 1);
+    for (let i = 1; i < masks.length; i++) {
+      tl.to(masks[i], { clipPath: FULL }, i).to(arts[i], { scale: 1, ease: 'none' }, i).to(arts[i - 1], { scale: 1.2, ease: 'none' }, i)
+        .to(items[i - 1], { opacity: DIM, duration: FADE, ease: 'none' }, i).to(items[i], { opacity: 1, duration: FADE, ease: 'none' }, i).addLabel('s' + i, i + 1);
+    }
+    const END = masks.length;
+    tl.to({}, { duration: 0.01 }, END - 0.01);
+    const dur = tl.duration();
+    const labels = Array.from(new Set(Object.values(tl.labels).map(t => t / dur))).sort((a, b) => a - b);
+    const revealEase = gsap.parseEase(EASE);
+    // Snap forward once a reveal is 10% in, back once it drops under 90%.
+    function pick(p, dir) {
+      p = gsap.utils.clamp(0, 1, p);
+      for (let i = 0; i < labels.length - 1; i++) {
+        const lo = labels[i], hi = labels[i + 1];
+        if (p > hi) continue;
+        const shown = revealEase(gsap.utils.clamp(0, 1, ((p - lo) / (hi - lo)) / TRANSITION));
+        return shown >= (dir > 0 ? SNAP_FORWARD_AT : dir < 0 ? SNAP_BACK_AT : 0.5) ? hi : lo;
+      }
+      return labels[labels.length - 1];
+    }
+    const st = ScrollTrigger.create({
+      animation: tl, trigger: section, start: 'top top', end: () => '+=' + Math.round(END * window.innerHeight),
+      pin: pinEl, pinSpacing: true, anticipatePin: 1, invalidateOnRefresh: true, scrub: lenis ? true : 0.8,
+      snap: lenis ? false : { snapTo: (v, self) => pick(v, self.direction), duration: { min: .45, max: .65 }, delay: SNAP_DELAY / 1000, ease: 'power1.inOut', inertia: false }
+    });
+    if (!lenis) return;
+    let dir = 0, lastY = st.scroll(), touching = false, wheelT, idleT;
+    const heading = () => lenis.isScrolling === 'smooth' && typeof lenis.targetScroll === 'number' ? lenis.targetScroll : st.scroll();
+    function trySnap() {
+      if (touching || lenis.isStopped) return;
+      const range = st.end - st.start, y = heading();
+      if (range <= 0 || y < st.start || y > st.end) return;
+      const to = Math.round(st.start + range * pick((y - st.start) / range, dir));
+      if (Math.abs(to - y) >= 2) lenis.scrollTo(to, { lerp: 0.1 });
+    }
+    const onScroll = () => { const y = st.scroll(); if (y !== lastY) { dir = y > lastY ? 1 : -1; lastY = y; } clearTimeout(idleT); idleT = setTimeout(trySnap, SNAP_DELAY); };
+    const onWheel = e => { if (e.ctrlKey) return; if (e.deltaY) dir = e.deltaY > 0 ? 1 : -1; clearTimeout(wheelT); wheelT = setTimeout(trySnap, SNAP_DELAY); };
+    const onTouchStart = () => { touching = true; clearTimeout(idleT); clearTimeout(wheelT); };
+    const onTouchEnd = () => { touching = false; clearTimeout(idleT); idleT = setTimeout(trySnap, SNAP_DELAY); };
+    const off = lenis.on('scroll', onScroll);
+    addEventListener('wheel', onWheel, { passive: true });
+    addEventListener('touchstart', onTouchStart, { passive: true });
+    addEventListener('touchend', onTouchEnd, { passive: true });
+    return () => { clearTimeout(idleT); clearTimeout(wheelT); off && off(); removeEventListener('wheel', onWheel); removeEventListener('touchstart', onTouchStart); removeEventListener('touchend', onTouchEnd); };
+  });
+
+  /* ---------- Rough to round: shape follows the pointer, morphs at checkpoints, leaves fading trails ---------- */
+  (function roughToRound() {
+    const track = $('#track'), svg = $('#track-shape'), path = $('#track-path'), label = $('#track-label');
+    const C = 110, Rr = 96;
+    const CHECKS = [
+      { p: 0, d: poly(4, Rr * 1.1, C, C, -Math.PI / 4), rot: 0 },
+      { p: .2, d: poly(5, Rr, C, C + 6), rot: 90 },
+      { p: .4, d: poly(6, Rr, C, C), rot: 180 },
+      { p: .6, d: poly(8, Rr, C, C), rot: 270 },
+      { p: .8, d: poly(12, Rr, C, C), rot: 360 },
+      { p: 1, d: circ(Rr * 0.95, C, C), rot: 450 }
+    ];
+    path.setAttribute('d', CHECKS[0].d);
+    const tl = gsap.timeline({ paused: true });
+    for (let i = 1; i < CHECKS.length; i++) {
+      tl.to(path, { morphSVG: { shape: CHECKS[i].d, type: 'rotational' }, rotation: CHECKS[i].rot, svgOrigin: C + ' ' + C, duration: CHECKS[i].p - CHECKS[i - 1].p, ease: 'none' }, CHECKS[i - 1].p);
+    }
+    let size = 220, cur = 0, dragging = false, dragOff = 0;
+    const leftFor = p => p * (track.clientWidth - size);
+    function trail(i) {
+      const c = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      c.setAttribute('viewBox', '0 0 220 220'); c.setAttribute('class', 'trail-clone'); c.setAttribute('aria-hidden', 'true');
+      c.style.cssText = `left:${leftFor(CHECKS[i].p)}px;width:${size}px;height:${size}px;transform:rotate(${CHECKS[i].rot}deg)`;
+      c.innerHTML = `<path d="${CHECKS[i].d}" fill="none" stroke="currentColor" stroke-width="1"/>`;
+      track.appendChild(c);
+      gsap.to(c, { opacity: 0, duration: 1.4, ease: 'power2.out', onComplete: () => c.remove() });
+    }
+    function set(p, animate) {
+      const prev = cur; cur = p;
+      tl.progress(p);
+      CHECKS.forEach((ck, i) => { if ((prev < ck.p && p >= ck.p) || (prev > ck.p && p <= ck.p)) trail(i); });
+      const x = leftFor(p);
+      gsap.to([svg, label], { x, duration: animate ? 0.12 : 0, ease: 'none', overwrite: 'auto' });
+      label.textContent = Math.round(p * 100) + '% round';
+    }
+    const fromX = clientX => { const r = track.getBoundingClientRect(); size = svg.getBoundingClientRect().width; return gsap.utils.clamp(0, 1, (clientX - r.left - size / 2) / (r.width - size)); };
+    track.addEventListener('pointermove', e => {
+      if (e.pointerType === 'mouse') set(fromX(e.clientX), true);
+      else if (dragging) set(fromX(e.clientX - dragOff), false);
+    });
+    svg.addEventListener('pointerdown', e => {
+      if (e.pointerType === 'mouse') return;
+      dragging = true; const r = svg.getBoundingClientRect(); dragOff = e.clientX - (r.left + r.width / 2);
+      track.setPointerCapture(e.pointerId);
+    });
+    ['pointerup', 'pointercancel'].forEach(ev => track.addEventListener(ev, () => { dragging = false; }));
+    // Keyboard: arrows step the shape along the track.
+    track.tabIndex = 0; track.setAttribute('role', 'slider'); track.setAttribute('aria-label', 'Rough to round'); track.setAttribute('aria-valuemin', '0'); track.setAttribute('aria-valuemax', '100');
+    track.addEventListener('keydown', e => {
+      const step = e.key === 'ArrowRight' ? .05 : e.key === 'ArrowLeft' ? -.05 : 0;
+      if (!step) return; e.preventDefault(); set(gsap.utils.clamp(0, 1, cur + step), true); track.setAttribute('aria-valuenow', Math.round(cur * 100));
+    });
+    addEventListener('resize', () => { size = svg.getBoundingClientRect().width; set(cur, false); });
+    set(0, false);
+  })();
+
+  /* ---------- Focus section: heading blurs in, then the class tickets rise over it ---------- */
+  gsap.matchMedia().add('(min-width: 992px)', () => {
+    if (reduce) return;
+    const split = SplitText.create('#focus-h', { type: 'lines', linesClass: 'line' });
+    const tl = gsap.timeline({ scrollTrigger: { trigger: '#focus', start: 'top top', end: '+=180%', pin: true, scrub: true } });
+    tl.from(split.lines, { opacity: 0, filter: 'blur(18px)', y: 30, stagger: .15, duration: .5 })
+      .to('#focus-h', { filter: 'blur(14px)', opacity: .55, duration: .4 }, '+=.25')
+      .from('.ticket', { yPercent: 130, rotation: i => [-6, 3, 8][i], stagger: .12, duration: .6, ease: 'power2.out' }, '<')
+      .to('.ticket', { rotation: i => [0, 0, 3][i], y: i => [0, 0, 18][i], duration: .3 });
+    return () => split.revert();
+  });
+
+  /* ---------- Studio desk: windows open from their icons and drag around ---------- */
+  (function desk() {
+    const deskEl = $('#visit');
+    let topZ = 10;
+    const front = w => { w.style.zIndex = ++topZ; };
+    $$('.win', deskEl).forEach(win => {
+      const bar = $('.win_bar', win);
+      let sx, sy, ox, oy, on = false;
+      win.addEventListener('pointerdown', () => front(win));
+      bar.addEventListener('pointerdown', e => {
+        if (e.target.closest('button')) return;
+        on = true; bar.setPointerCapture(e.pointerId);
+        sx = e.clientX; sy = e.clientY; ox = win.offsetLeft; oy = win.offsetTop;
+      });
+      bar.addEventListener('pointermove', e => {
+        if (!on) return;
+        const maxX = deskEl.clientWidth - win.offsetWidth, maxY = deskEl.clientHeight - win.offsetHeight;
+        win.style.left = gsap.utils.clamp(0, Math.max(0, maxX), ox + e.clientX - sx) + 'px';
+        win.style.top = gsap.utils.clamp(30, Math.max(30, maxY), oy + e.clientY - sy) + 'px';
+      });
+      ['pointerup', 'pointercancel'].forEach(ev => bar.addEventListener(ev, () => { on = false; }));
+      $('.dots button', win).addEventListener('click', () => toggle(win, false));
+    });
+    function originFor(win) {
+      const icon = $(`.icon[data-win="${win.id.slice(4)}"]`), wr = win.getBoundingClientRect(), ir = icon.getBoundingClientRect();
+      return `${ir.left + ir.width / 2 - wr.left}px ${ir.top + ir.height / 2 - wr.top}px`;
+    }
+    function toggle(win, open) {
+      if (open) {
+        win.hidden = false; front(win);
+        // Keep reopened windows on screen on small desks.
+        win.style.left = Math.min(win.offsetLeft, Math.max(0, deskEl.clientWidth - win.offsetWidth)) + 'px';
+        gsap.fromTo(win, { scale: .05, opacity: 0, transformOrigin: originFor(win) }, { scale: 1, opacity: 1, duration: reduce ? 0 : .45, ease: 'power2.out' });
+      } else {
+        gsap.to(win, { scale: .05, opacity: 0, transformOrigin: originFor(win), duration: reduce ? 0 : .35, ease: 'power2.in', onComplete: () => { win.hidden = true; } });
+      }
+    }
+    $$('.icon', deskEl).forEach(btn => btn.addEventListener('click', () => {
+      const win = $('#win-' + btn.dataset.win);
+      if (win.hidden) toggle(win, true); else front(win);
+    }));
+    // On phones start with windows stacked inside the viewport.
+    if (isMobile) {
+      $$('.win', deskEl).forEach(w => { w.style.left = '16px'; w.style.top = '50px'; });
+      $('#win-log').hidden = true;
+    }
+  })();
+
+  addEventListener('load', () => ScrollTrigger.refresh());
+})();
+</script>
+</body>
+</html>
