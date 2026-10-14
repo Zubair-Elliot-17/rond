@@ -569,7 +569,9 @@ footer { padding-block: 60px 24px; }
     const target = document.getElementById(a.getAttribute('href').slice(1));
     if (!target || !lenis) return;
     e.preventDefault();
-    lenis.scrollTo(target, { duration: 1.4 });
+    // Jump behind a crossfade so sections in between don't play their animations on the way past.
+    const jump = () => lenis.scrollTo(target, { immediate: true, force: true });
+    document.startViewTransition ? document.startViewTransition(jump) : jump();
     target.tabIndex = -1; target.focus({ preventScroll: true });
   }));
 
