@@ -2,11 +2,9 @@
 
 A landing page for **ROND**, a fictional ceramics studio and kiln in Woodstock, Cape Town. I built it as a motion study: every animation recreates one from [neutomni.com](https://neutomni.com), a Webflow studio site whose idea and motion I like. The brand, copy and artwork are new.
 
-[**Live site**](https://rond-taupe.vercel.app) · [**Walkthrough video**](https://rond-taupe.vercel.app/docs/walkthrough.mp4) · [**Animation map**](#animation-map)
+[**Live site**](https://rond-taupe.vercel.app) · [**Animation map**](#animation-map)
 
-<a href="https://rond-taupe.vercel.app/docs/walkthrough.mp4"><img src="docs/walkthrough-poster.jpg" alt="Play the 85-second narrated walkthrough of the ROND site" width="820"></a>
-
-<sub>An 85-second narrated tour of the site and the code behind it. Also in the repo as <a href="docs/walkthrough.mp4">docs/walkthrough.mp4</a>.</sub>
+<a href="https://rond-taupe.vercel.app"><img src="docs/home.jpg" alt="The ROND homepage" width="820"></a>
 
 The idea I borrowed is Neutomni's "the road can get bumpy, we keep you rolling": a polygon rolls along a bumpy road and turns into a circle as you scroll. For a pottery studio that is the whole job. Clay starts as a lump, and the wheel keeps turning until it comes out round.
 
